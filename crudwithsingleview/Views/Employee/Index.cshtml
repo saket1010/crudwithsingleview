@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Employee Page";
+}
+@{
+    var data = ViewData["formempdata"]
+                as crudwithsingleview.Models.Employee;
+}
+
+@model IEnumerable<crudwithsingleview.Models.Employee>
+
+<div class="container">
+<form asp-action="AddOrUpdate">
+  <label for="Name">Name:</label><br>
+  <input type="text" name="Name" value="@if(data!=null){@data.Name}"><br />
+  
+  <label for="Designation" >Designation:</label><br>
+  <input type="text" name="Designation" value="@if(data!=null){@data.Name}"/><br>
+
+  <label for="Age" >Age:</label><br>
+  <input type="text" name="Age" value="@if(data!=null){@data.Age}"><br>
+
+  <label for="JoiningDate">DateOfJoining:</label><br>
+  <input type="datetime-local"  name="JoiningDate" value="@if(data!=null){@data.JoiningDate}"><br>
+
+  <label for="Address">Address:</label><br>
+  <input type="text" name="Address" value="@if(data!=null){@data.Address}"><br>
+
+  <label for="Salary">Salary:</label><br>
+  <input type="text" name="Salary" value="@if(data!=null){@data.Salary}"><br><br />
+
+
+   @if(data==null)
+        {
+            <input type="submit" value="Add Employee"/>
+        }
+        else
+        {
+         <input type="submit" value="Update Employee"/>
+        }
+    </form>
+
+<h2>Employee List</h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Designation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Salary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JoiningDate)
+                </th>
+                <th></th>
+                <th>Edit Action</th>
+                <th>Delete Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JoiningDate)
+                </td>
+                <td>
+                <td class="text-center">
+                    <a asp-action="Update" class="btn btn-outline-primary"  asp-route-Id ="@item.Id">Update</a>
+                </td>
+                <td class="text-center">
+                    <a asp-action="Delete" class="btn btn-outline-danger" asp-route-Id ="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
