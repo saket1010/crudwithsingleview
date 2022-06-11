@@ -9,10 +9,5 @@
         public String JoiningDate  { get; set; }
         public String Address { get; set; }
         public String Salary { get; set; }
-
-        public Employee()
-        {
-            Id = this.Id+1;
-        }
     }
 }

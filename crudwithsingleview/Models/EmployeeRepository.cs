@@ -8,12 +8,14 @@
         {
             if(employee==null)
             {
-                throw new Exception("null parameter passed");
+                throw new Exception("Null parameter passed");
             }
             else
             {
+               
                 if (GetEmployeeById(employee.Id)==null)
                 {
+                    employee.Id=GetLastEmpId()+1;
                     _employees.Add(employee);
                 }
                 else
@@ -70,6 +72,17 @@
         public List<Employee> GetEmployees()
         {
             return _employees;
+        }
+        public int GetLastEmpId()
+        {
+            if (_employees.Count > 0)
+            {
+                return _employees[_employees.Count - 1].Id;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
